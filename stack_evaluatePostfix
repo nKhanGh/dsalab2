@@ -1,0 +1,25 @@
+int evaluatePostfix(string expr){
+    if(expr.size() == 0) return 0;
+    stack<int> st;
+    size_t pos = 0;
+    while(pos < expr.size()){
+        while(pos < expr.size() && expr[pos] == ' ') pos++;
+        if(pos >= expr.size()) break;
+        size_t next_pos = expr.find(' ', pos);
+        if(next_pos == string::npos) next_pos = expr.size();
+        string a = expr.substr(pos, next_pos - pos);
+        pos = next_pos;
+        if((a[0] >= '0' && a[0] <= '9') || (a[0] == '-' && a.size() > 1)) st.push(stoi(a));
+        else{
+            int a1 = st.top();
+            st.pop();
+            int a2 = st.top();
+            st.pop();
+            if(a == "+") st.push(a1 + a2);
+            else if(a == "-") st.push(a2 - a1);
+            else if(a == "*") st.push(a2 * a1);
+            else if(a == "/") st.push(a2 / a1);
+        }
+    }
+    return st.top();
+}
