@@ -1,0 +1,38 @@
+DataLog::DataLog()
+{
+     logList.push_back(0);
+     currentState = logList.begin();
+}
+
+DataLog::DataLog(const int &data)
+{
+     this->logList.push_back(data);
+     currentState = logList.begin();
+}
+
+void DataLog::addCurrentState(int number)
+{
+    *currentState += number;
+}
+
+void DataLog::subtractCurrentState(int number)
+{
+    *currentState -= number;
+}
+
+void DataLog::save()
+{
+     if(currentState != logList.end()) logList.erase(++currentState, logList.end());
+     logList.push_back(logList.back());
+     currentState = --logList.end();
+}
+
+void DataLog::undo()
+{
+     if(currentState != logList.begin()) --currentState;
+}
+
+void DataLog::redo()
+{
+     if(currentState != std::prev(logList.end())) ++currentState;
+}
