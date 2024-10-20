@@ -1,0 +1,22 @@
+int baseballScore(string ops){
+    stack<int> a;
+    for(size_t i = 0;i < ops.size(); i++){
+        
+        if(ops[i] == 'C') a.pop();
+        else if(ops[i] == 'D') a.push(a.top()*2);
+        else if(ops[i] == '+') {
+            int a1 = a.top();
+            a.pop();
+            int a2 = a.top();
+            a.push(a1);
+            a.push(a1 + a2);
+        }
+        else a.push(ops[i] - 48);
+    }
+    int sum = 0;
+    while(!a.empty()){
+        sum += a.top();
+        a.pop();
+    }
+    return sum;
+}
