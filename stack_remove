@@ -1,0 +1,16 @@
+string removeDuplicates(string S){
+    string s = "";
+    stack<char> st;
+    for(size_t i = 0; i< S.size(); i++){
+        if(st.empty()) st.push(S[i]);
+        else{
+            if(st.top() != S[i]) st.push(S[i]);
+            else st.pop();
+        }
+    }
+    while(!st.empty()){
+        s = st.top() +s;
+        st.pop();
+    }
+    return s;
+}
