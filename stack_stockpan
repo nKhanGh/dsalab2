@@ -1,0 +1,11 @@
+vector<int> stock_span(const vector<int>& ns) {
+    stack<int> st;
+    vector<int> n(ns.size());
+    for(size_t i = 0; i < ns.size(); i++){
+        while(!st.empty() && ns[st.top()] < ns[i]) st.pop();
+        if(st.empty()) n[i] = i + 1;
+        else n[i] = i - st.top();
+        st.push(i);
+    }
+    return n;
+}
