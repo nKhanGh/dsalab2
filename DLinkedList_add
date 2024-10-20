@@ -1,0 +1,52 @@
+template <class T>
+void DLinkedList<T>::add(const T& e) {
+    if(count == 0){
+        head = new Node(e);
+        tail = head;
+    } else if(count == 1){
+        tail = new Node(e);
+        head->next= tail;
+        tail->previous = head;
+    } else{
+        Node* a = new Node(e);
+        a->previous = tail;
+        tail->next = a;
+        tail = a;
+    }
+    count++;
+}
+
+template<class T>
+void DLinkedList<T>::add(int index, const T& e) {
+    if(index < 0 || index > count) {
+        throw std::out_of_range("Index is out of range!");
+    }
+    if(count == 0 || count == index){
+        add(e);
+        return;
+    }
+    Node* a = head;
+    Node* b = NULL;
+    Node* c = new Node(e);
+    for(int i = 0; i < index; i++){
+        b = a;
+        a = a->next;
+    }
+    if(a == head){
+        c->next = head;
+        head->previous = c;
+        head = c;
+        count ++;
+    } else{
+        b->next = c;
+        c->next = a;
+        a->previous = c;
+        c->previous = b;
+        count++;
+    }
+}
+
+template<class T>
+int DLinkedList<T>::size() {
+    return count;
+}
