@@ -1,0 +1,44 @@
+template<class T>
+T DLinkedList<T>::get(int index) {
+    if(index < 0 || index >= count) {
+        throw std::out_of_range("Index is out of range!");
+    }
+    Node* a = head;
+    for(int i = 0; i < index; i++) a = a->next;
+    return a->data;
+}
+
+template <class T>
+void DLinkedList<T>::set(int index, const T& e) {
+    if(index < 0 || index >= count) {
+        throw std::out_of_range("Index is out of range!");
+    }
+    Node* a = head;
+    for(int i = 0; i < index; i++) a = a->next;
+    a->data = e;
+}
+
+template<class T>
+bool DLinkedList<T>::empty() {
+    return count == 0;
+}
+
+template<class T>
+int DLinkedList<T>::indexOf(const T& item) {
+    Node* a = head;
+    for(int i = 0; i < count; i++){
+        if(a->data == item) return i;
+        a = a->next;
+    }
+    return -1;
+}
+
+template<class T>
+bool DLinkedList<T>::contains(const T& item) {
+    Node* a = head;
+    while(a != NULL){
+        if(a->data == item) return true;
+        a = a->next;
+    }
+    return false;
+}
