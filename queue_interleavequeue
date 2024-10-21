@@ -1,0 +1,19 @@
+void interleaveQueue(queue<int>& q){
+    queue<int> be;
+    queue<int> en;
+    int s = q.size()/2;
+    for(int i = 0; i < s; i++){
+        be.push(q.front());
+        q.pop();
+    }
+    while(!q.empty()){
+        en.push(q.front());
+        q.pop();
+    }
+    for(int i = 0; i < s; i++){
+        q.push(be.front());
+        q.push(en.front());
+        be.pop();
+        en.pop();
+    }
+}
