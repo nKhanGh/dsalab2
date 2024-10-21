@@ -1,0 +1,13 @@
+int sumOfMaxSubarray(vector<int>& nums, int k) {
+    deque<int> qe;
+    int sum = 0;
+    for(size_t i = 0; i < nums.size(); i++){
+        while(!qe.empty() && nums[i] > nums[qe.back()]) qe.pop_back();
+        qe.push_back(i);
+        if(i >= k - 1){
+            if(i - qe.front() > k - 1) qe.pop_front();
+            sum += nums[qe.front()];
+        }
+    }
+    return sum;
+}
