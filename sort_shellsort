@@ -1,0 +1,24 @@
+static void sortSegment(T* start, T* end, int segment_idx, int cur_segment_total) {
+    size_t size = end - start;
+    for(size_t i = segment_idx; i < size; i++){
+        T x = start[i];
+        int j = i - segment_idx;
+        bool cont = true;
+        while(cont && j >= 0){
+            if(start[j] > x) {
+                start[j + segment_idx] = start[j];
+                j -= segment_idx;
+            }
+            else cont = false;
+        }
+        start[j + segment_idx] = x;
+    }
+    cout << segment_idx << " segments: "; printArray( start, end);
+}
+
+static void ShellSort(T* start, T* end, int* num_segment_list, int num_phases) {
+    for(int i = num_phases - 1; i >= 0; i--){
+        int num = 0;
+        sortSegment(start, end, num_segment_list[i], num);
+    } 
+}
