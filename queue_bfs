@@ -1,0 +1,17 @@
+void bfs(vector<vector<int>> graph, int start) {
+	vector<bool> visited(graph.size(), false);
+	queue<int> qe;
+	qe.push(start);
+	int k = 0;
+	while(!qe.empty()){
+	    int v = qe.front();
+	    qe.pop();
+	    if(!visited[v]){
+	        visited[v] = true;
+	        k++;
+	        cout << v;
+	        if(k < graph.size()) cout << " ";
+	    }
+	   for(int u : graph[v]) if(!visited[u]) qe.push(u);
+	}
+}
