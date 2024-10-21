@@ -1,0 +1,24 @@
+bool isBipartite(vector<vector<int>> graph) {
+    int n = graph.size();
+    vector<int> color(n, -1);
+    
+    for(int i = 0; i < n; i++){
+        if(color[i] == -1){
+            color[i] = 0;
+            queue<int> qe;
+            qe.push(i);
+            while(!qe.empty()){
+                int v = qe.front();
+                qe.pop();
+                for(int u :graph[v]){
+                    if(color[u] == -1){
+                        qe.push(u);
+                        color[u] = 1 - color[v];
+                    }
+                    else if(color[u] == color[v]) return false;
+                }
+            }
+        }
+    }
+    return true;
+}
