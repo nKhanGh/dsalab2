@@ -1,0 +1,21 @@
+template <class T>
+void SLinkedList<T>::bubbleSort()
+{
+    if(size() == 0 || size() == 1) return;
+    bool cont = true;
+    while(cont){
+        cont = false;
+        Node* now = head->next;
+        Node* pas = head;
+        while(now != NULL){
+            if(now->data < pas->data) {
+                cont = true;
+                swap(now->data, pas->data);
+            }
+            now = now->next;
+            pas = pas->next;
+        }
+        if(!cont) break;
+        printList();
+    }
+}
